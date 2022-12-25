@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package helloworld;
+option go_package="custompb/proto/gen/helloworld";
+
+import "custompb/proto/interceptor/interceptor.proto";
+
+service Greeter {
+    option (interceptor.service_handler) = {
+        authorization : "login_token",
+    };
+
+    rpc SayHello (HelloRequest) returns (HelloReply) {
+        option (interceptor.method_handler) = {
+            whitelist: "ip_whitelist",
+            logger: true,
+        };
+    }
+
+    rpc SayHello2 (HelloRequest) returns (HelloReply) {
+        option (interceptor.method_handler) = {
+            logger: false,
+        };
+    }
+
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloReply {
+    string message = 1;
+}

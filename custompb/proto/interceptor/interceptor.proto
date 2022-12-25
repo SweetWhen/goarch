@@ -1,0 +1,30 @@
+// plugin/interceptor/options/interceptor.proto
+
+syntax = "proto3";
+
+package interceptor;
+option go_package="custompb/proto/gen/interceptor";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MethodOptions {
+    optional MethodHandler method_handler = 63500;
+}
+
+extend google.protobuf.ServiceOptions {
+    optional ServiceHandler service_handler = 63501;
+}
+
+message MethodHandler {
+    optional string authorization = 1; //login token
+    optional string whitelist = 2; // ip whitelist
+    optional bool logger = 3;
+
+}
+
+message ServiceHandler {
+    optional string authorization = 1; // login token
+    optional string whitelist = 2;
+    optional bool logger = 3;
+
+}
