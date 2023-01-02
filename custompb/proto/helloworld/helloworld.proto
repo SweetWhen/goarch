@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package helloworld;
-option go_package="custompb/proto/gen/helloworld";
+option go_package="github.com/SweetWhen/goarch/custompb/proto/gen/helloworld";
 
 import "custompb/proto/interceptor/interceptor.proto";
 
