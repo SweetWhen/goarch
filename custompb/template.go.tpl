@@ -116,6 +116,7 @@ func (s *{{$.Name}}) {{ .HandlerName }} (ctx *gin.Context) {
 }
 {{end}}
 
+// the f**k http register func
 func (s *{{$.Name}}) RegisterService() {
 {{range .Methods}}
 		s.router.Handle("{{.Method}}", "{{.Path}}", s.{{ .HandlerName }})

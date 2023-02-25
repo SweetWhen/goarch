@@ -1,0 +1,42 @@
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: sweetim_server
+          http_filters:
+          - name: envoy.filters.http.router
+          route_config:
+            virtual_hosts:
+            - name: im-logic
+              domains: ["*"]
+              routes:
+                - match:
+                    prefix: "/"
+                  route:
+                    cluster: im-logic
+                    retry_policy:
+                      retry_on: "5xx"
+                      num_retries: 5
+  clusters:
+  - name: im-logic
+    connect_timeout: 5s
+    load_assignment:
+      cluster_name: single_cluster
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 192.168.2.102
+                port_value: 9551
+
+
+

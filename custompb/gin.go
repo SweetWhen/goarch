@@ -43,10 +43,16 @@ func generateFile(gen *protogen.Plugin, file *protogen.File) *protogen.Generated
 }
 
 func genService(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile, s *protogen.Service) {
-	if s.Desc.Options().(*descriptorpb.ServiceOptions).GetDeprecated() {
+	svrOpts := s.Desc.Options().(*descriptorpb.ServiceOptions)
+	if svrOpts.GetDeprecated() {
 		g.P("//")
 		g.P(deprecationComment)
 	}
+	//for i, uOpt := range svrOpts.UninterpretedOption {
+	//	fmt.Printf("svrOpt uniter name:%s i:%d,  %s\n", s.GoName, i, uOpt.String())
+	//}
+	//svrHandler, ok := proto.GetExtension(s.Desc.Options(), customInterceptor.E_ServiceHandler).(*customInterceptor.ServiceHandler)
+	//fmt.Printf("genService GetExtension name:%s ok:%v, %s\n", s.GoName, ok, svrHandler.String())
 	// HTTP Server.
 	sd := &service{
 		Name:     s.GoName,
@@ -61,6 +67,8 @@ func genService(gen *protogen.Plugin, file *protogen.File, g *protogen.Generated
 
 func genMethod(m *protogen.Method) []*method {
 	var methods []*method
+	//methodHandler, ok := proto.GetExtension(m.Desc.Options(), customInterceptor.E_MethodHandler).(*customInterceptor.MethodHandler)
+	//fmt.Printf("genMethod extension, %s, extHandler: %s \n", m.GoName, methodHandler.String())
 
 	// 存在 http rule 配置
 	rule, ok := proto.GetExtension(m.Desc.Options(), annotations.E_Http).(*annotations.HttpRule)
