@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 设置媒体查询，自动根据设备进行缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>动画</title>
+    <style>
+    /* 使用 @keyframes规则可以创建动画， myAnim是样式名称  */
+    @keyframes myAnim {
+        0%{
+            width: 200px;
+            background-color: red;
+        }
+        50%{
+            width: 400px;
+            background-color: green;
+        }
+        100%{
+            width: 200px;
+            background-color: red;
+        }
+    }
+    /* 使用 animation 执行动画 animation: name duration timing-function delay iteratioin-count direction;
+    name: 动画名称
+    durati: 设置动画的持续时间
+    timing-function: 动画的速率 ease 逐渐变慢默认，linear均速，ease-in加速，ease-out减速，ease-in-out先加速后减速
+    delay: 动画延迟多久开始执行
+    iteration-count: 动画循环次数，infinite为无限次数循环
+    direction: 动画播放方向 normal默认， alternate第偶次数向前播放，奇次数反方向播放
+    animation-play-state: running播放，paused停止播放
+    */
+    div{
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        animation: myAnim 3s linear 1s infinite alternate;
+    }
+    div:hover{
+        /* 鼠标移到触发动画播放 */
+        animation-play-state: paused;
+    }
+
+    .icon1{
+        /* span是内联元素，设置block属性能把一个内联元素设置成一个块元素，inline能把一个块元素变成行内元素 */
+        display: block;
+        width: 45px;
+        height: 45px;
+        background-image: url("../image/emoj.webp");
+        background-position: -40px -30px;
+        border: 1px solid red;
+    }
+    .icon2{
+        /* span是内联元素，设置block属性能把一个内联元素设置成一个块元素，inline能把一个块元素变成行内元素 */
+        display: block;
+        width: 45px;
+        height: 45px;
+        /* 通过调整背景图片偏移显示不同表情 */
+        background-image: url("../image/emoj.webp");
+        background-position: -232px -84px;
+        border: 1px solid red;
+    }
+    /* 可以通过访问阿里 iconfont.com下载各种字体图标，把它们的源码放到我们的css目录下
+       然后引用它们的css，再通过如下定义引用之
+       <link rel="stylesheet" href="./font/iconfont.css">
+    */
+
+    </style>
+
+</head>
+<body>
+    <div></div>
+    <br>
+    <span class="icon1"></span>
+    <span class="icon2"></span>
+    <!-- 如下引用一个字体图标 iconfont必须放在前面 -->
+    <span class="iconfont icon-home"></span>
+
+</body>
+</html>

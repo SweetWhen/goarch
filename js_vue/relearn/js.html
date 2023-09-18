@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btn1 {
+            width: 60%;
+            height: 80px;
+            background-color: aquamarine;
+        }
+        .scrolldiv{
+         width: 100px;
+          height: 400px;
+          background-color: bisque;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="dstyle">
+    </div>
+    <button onclick="clickHandle()">按钮</button>
+    <button id="btn">DOM按钮</button>
+    <button id="btn1">单击</button>
+    <button id="btn2" a="https://www.baidu.com">单击2</button>
+    <input type="text" id="username">    
+    <input type="text" id="passwd">    
+    <form id="myform" onsubmit="submithandler" name="提交按钮" action="">
+        <input type="text">
+        <button id="resetbtn">重置按钮</button>
+    </form>
+
+    <script>
+        var arr = ["abc", 1, 0, "cde"];
+        var item;
+        // 数组前pop， unshift() 数组前push
+        while(item = arr.shift()) {
+            console.log(item);
+        }
+        //操作css
+        var cstyle = document.getElementById("dstyle")
+        cstyle.style.height = "200px"
+        cstyle.style.width = "200px"
+        cstyle.style.backgroundColor = "red"
+
+        //HTML事件按钮， 注册的函数名称混入了 HTML标签中
+        function clickHandle() {
+            console.log("点击了按钮")
+        }
+        //DOM0 按钮事件， js代码未混入HTML标签中， 缺点是无法同时添加多个handler
+        var btn = document.getElementById("btn")
+        btn.onclick= function() {
+            console.log("点击了按钮 DOM0 响应")
+        }
+        //DOM2事件
+        btn.addEventListener("click", function() {
+            console.log("dom2事件 handler1111")
+        })
+        //可以添加多个handler
+        btn.addEventListener("click", function() {
+            console.log("dom2事件 handler2222")
+        })
+        //鼠标事件：
+        /*
+        click: 按下鼠标时触发
+        dbclick: 在同一个元素上双击鼠标时触发
+        mousedown: 按下鼠标键时触发
+        mouseup: 释放按下的鼠标键时触发
+        mousemove: 当鼠标在节点内部移动时触发，当鼠标持续移动时，该事件会连续触发
+        mouseenter: 鼠标进入一个节点时触发，进入子节点不会触发这个事件
+        mouseleave: 鼠标离开一个节点时触发，离开父节点不会触发这个事件
+        mouseover: 鼠标进入一个节点时触发，进入子节点会再一次触发这个事件
+        mouseout: 鼠标离开一个节点时触发，离开父节点也会触发这个事件
+        wheel: 滚动鼠标的滚轮时触发
+        */
+       var btn1 = document.getElementById("btn1")
+       btn1.ondblclick = function() {
+        console.log("双击")
+       }
+       btn1.onmousedown = function() {
+        console.log("鼠标按下")
+       }
+       btn1.onmouseup = function() {
+        console.log("鼠标抬起")
+       }
+       btn1.onmousemove = function() {
+            console.log("鼠标移过")
+       }
+       btn1.onmouseenter = function() {
+        console.log("鼠标进入，再进入子节点不会触发")
+       }
+       btn1.onmouseleave = function() {
+        console.log("鼠标进入，离开子节点不会触发")
+       }
+       btn1.onwheel = function() {
+        console.log("鼠标滚轮滚动了")
+       }
+       // 有一个入参为Event事件对象，里边包含这个事件大量信息
+       btn1.onclick = function(e) {
+            console.log(e)
+            // target 是html标签对象
+            // e.type : 点击类型
+            e.target.innerHTML = "点击之后"
+       }
+
+       var btn2 = document.getElementById("btn2")
+       btn2.onclick = function(e) {
+        //  阻止了默认的跳转行为
+            e.preventDefault();
+            console.log("点击了A")
+       }
+       // e.stopPropagation 方法阻止事件在DOM中继续传播，防止再触发定义在别的节点上的监听函数，但是不包括在当前节点上其他的事件监听函数
+       // 防止同个事件继续冒泡
+
+       /*
+        键盘事件：
+        keydown: 按下键盘时触发
+        keypress: 按下有值的键时触发，即按下ctrl,alt,shift,meta这样无值的键不会触发这个事件，对于有值的键，按下时先触发keydown事件，再触发这个事件
+        keyup: 松开键盘时触发该事件        
+       */
+      btn2.onkeypress = function(e) {
+        // e是键盘事件
+        console.log(e)
+      }
+
+      var username = document.getElementById("username")
+      username.onkeypress = function(e) {
+        //按下事件有延迟，第一个value获取不到
+        console.log(e.target.value)
+      }
+      username.onkeyup = function(e) {
+        //按钮弹上事件没有延迟
+        console.log(e.target.value)
+        //keyCode代表案件的唯一标识，即asiic码
+        console.log(e.keyCode)
+      }
+
+      /*
+      表单事件
+      input事件当<input><select><textarea>的值发生变化时触发，对于复选框<input type=checkbox>或单选框 <input type=radio> 用户改变选项时也会触发事件
+            会连续触发，比如用户每按下一次按键，就会触发一次input事件
+
+      select 事件 当在<input> <textarea>里面选中文本内容时触发该事件
+      change事件 当<input> <select> <textarea>的值发生变化时触发，它与input事件的最大不同就是不会连续触发，只有当全部修改完成时才会触发（回车或者失去焦点的时候才会触发）
+      reset事件发生在表单对象<form>上，而不是发生在表单的成员上，当所有表单成员变回默认值的时候触发
+      submit事件 当表单数据想服务器提交时触发，该事件发生对象是<form>元素，而不是<button>元素，因为提交的是表单，而不是按钮
+      */
+      username.oninput = function(e) {
+            console.log("input 事件：", e.target.value)
+      }
+      username.onselect = function(e) {
+        console.log("选中了输入框内容:", e.target.value)
+      }
+      var passwd = document.getElementById("passwd");
+      passwd.onchange =function(e) {
+        console.log("密码变化了：", passwd.target.value)
+      }
+
+      function submithandler(e) {
+            console.log("submithandler: ", e.target.value)
+      }
+
+    </script>
+
+    <ul id="list">
+      <li>列表1</li>
+      <li>列表2</li>
+      <li>列表3</li>
+    </ul>
+
+    <script>
+    // 事件委托是指让父元素处理子元素事件
+    var list = document.getElementById("list");
+          list.addEventListener("click", function(e) {
+            if(e.target.tagName.toLowerCase() === "li") {
+              console.log("点击了LI标签", event.target);
+            }
+          });
+
+          // timerId 后续可以用来取消这个定时器,第二个参数单位毫秒
+          var timerId = setTimeout(function() {
+            console.log("1s过去了");
+          }, 1000);
+          //取消定时器
+          clearTimeout(timerId);
+
+          var name = "iwen";
+          var user = {
+            name: "iddddd",
+            getName: function() {
+              // this 永远指向当前调用者
+              console.log("对象方法this: ",this.name);
+              var that = this;
+              setTimeout(function() {
+                // 如果setTimeout回调的函数是对象的方法，那么回调函数内部的this关键字指向全局环境，而不是定义时所在的那个对象
+                console.log("setTimeout回调方法："+this.name);
+                //只能先用一个变量保存住方法的this
+                console.log("这个是方法对象this的一个引用：" + that.name);
+              })
+            }
+          }
+
+          user.getName();
+          // setInterval 每间隔一定时间就执行一次，写法与setTimeout一样
+          var i = 0;
+          var interTimer = setInterval(function() {
+            i++;
+            console.log(`interval i: ${i}`);
+            if (i >= 4)  {
+                clearTimeout(interTimer);
+            }
+          }, 1000);
+
+    </script>
+
+    <h1>滚动事件防抖</h1> 
+    <!-- 一般用于拖动窗口resize 窗口大小的时候，防止拖动过程中产生不必要动作 -->
+    <div class="scrolldiv"> </div>
+    <div class="scrolldiv"> </div>
+    <div class="scrolldiv"> </div>
+    <script>
+      function dobounce(fn, delay) {
+        var timer = null;
+        return function() {
+          if (timer) { //如果已经设置timer，我们删掉只保留最后一次timer
+            clearTimeout(timer)
+          }
+          timer = setTimeout(fn, delay);
+        }
+      }
+      var scrollHandle = function() {
+        //可以实时的拿到当前滚动条的位置
+        var scrollTop = document.documentElement.scrollTop;
+        console.log('当前滚动条位置：', + scrollTop);
+      }
+      // onscroll事件注册个回调
+      window.onscroll = dobounce(scrollHandle, 200);
+
+      // 节流: 规定时间之内一定要打印, 常用于搜索节流、等没有提交按钮的input种
+      var throttle = function(fn, delay) {
+          var valid = true;
+          return function() {
+            if(!valid){
+              return
+            }
+            valid = false;
+            setTimeout(function() {
+              fn();
+              valid = true;
+            }, delay);
+          }
+      }
+      window.onscroll = throttle(scrollHandle, 200);
+        
+    </script>
+
+
+
+</body>
+</html>

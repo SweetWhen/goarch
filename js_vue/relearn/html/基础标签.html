@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 必须不包含title标签 -->
+    <title>我的网页</title>
+</head>
+<body>
+    <h1>h1 标题</h1>
+    <h2>h2 标题</h2>
+    <h3>h3 标题</h3>
+    <h4>h4 标题</h4>
+    <h5>h5 标题</h5>
+    <h6>h6 标题</h6>
+    <p>这是一个段落标签 <br>在不希望产生一个段落的情况下产生换行请使用单标签br </p>
+    <hr color="greed" width="300px" size="5px" align="left">产生一条线，使用但标签 hr,
+    <br> hr有 color颜色、width长度，size高度, align居中left|right四个属性
+    <hr>
+    <img title="小姐姐" src="../image/meinv11.jpeg" alt="美丽的人1" width="200px" height="200px">
+    <p>img是图片标签，src属性表示图片路径，alt图像不见的时候替代的文本，width图片的宽度，height图片的高度，title鼠标悬停在图片上给予的提示</p>
+    <hr>
+    <a href="https://www.baidu.com">a标签是一个超连接标签</a>
+      <span></span> <span>点击前中后的颜色会自动变更</span>
+    <p>文本标签有em（着重文字，如高亮）,
+        b（加粗）,i（斜字体）,strong（加重语句）,
+        del（删除）,spanc（元素没有特定的含义方便添加css）六个
+        <ul >
+            <li type="disc">这是一个<em>em</em></li>
+            <li type="circle">这是一个<b>b</b></li>
+            <li type="square">这是一个<i>i</i></li>
+            <li type="none">这是一个<strong>strong</strong></li>
+            <li>这是一个<del>del</del></li>
+            <li>这是一个<span>span</span></li>
+        </ul>
+        ol标签是有序列表，ul是无序号列表(type有circle,square,none,disc)， li是它们的列表
+        <br>
+        ol的属性type拥有 1,a,A,i,I四种属性，用来控制序号类型
+        <ol type="I">
+            <li> 1</li>dd
+            <li> a</li>
+            <li> 我还可以无限嵌套
+                <ol type="1">
+                    <li>你</li>
+                    <li>我</li>
+                    <li>他</li>
+                </ol>
+            </li>
+        </ol>
+    </p>
+    <hr>
+    <p>
+        table标签表示表格,tr行，td单元格, vscode自动生成3行2列的表格快捷键为 table>tr*3>td*2{每个表格内容}
+       <br> border属性是表格边框属性(红色表示不建议这么写)，width单元格宽度，height为单元格高度
+        <br>
+        可以使用单元格 colspan(保留左，删除右)与 rowspan（保留上，删除下）属性进行单元格合并，如下合并单元格6、7， 还有15和20
+        <table border="1" width="600px" height="100px">
+            <tr>
+                <td>单元格1</td>
+                <td>单元格2</td>
+                <td>单元格3</td>
+                <td>单元格4</td>
+                <td>单元格5</td>
+            </tr>
+            <tr>
+                <td colspan="2">单元格6, 7</td>       
+                <td>单元格8</td>
+                <td>单元格9</td>
+                <td>单元格10</td>
+            </tr>
+            <tr>
+                <td>单元格11</td>
+                <td>单元格12</td>
+                <td>单元格13</td>
+                <td>单元格14</td>
+                <td rowspan="2">单元格15, 20</td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">单元格16,17,21,22</td>
+                <td>单元格18</td>
+                <td>单元格19</td>
+            </tr>
+            <tr>
+                <td>单元格23</td>
+                <td>单元格24</td>
+                <td>单元格25</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        form表单用于提交信息到服务端, action属性是服务器信息，method="get|post",name=表单的名称
+        <br>input表单内的一个输入框， name属性用于唯一标识一个输入框，它的type有如下：
+        <ul>
+            <li>text 表单输入框文本域</li>
+            <li>password 密码输入框，*或者黑点回显输入内容</li>
+            <li>submit时为提交按钮，这与button标签一样, value可以改变显示的名称</li>
+        </ul>
+        
+        <form action="https://www.baidu.com/login" method="post">
+            用户名：<input type="text" name="username"> 
+            <br>
+            密  码：<input type="password" name="userpasswd"> 
+            <input type="submit" value="登录"> 
+            <button>按钮</button>
+        </form>
+    </p>
+    <p>
+        常见的块级元素有div，form，h1~h6,hr,p,table,ul等，它们的其实都是换行开始
+        <br>
+        行内元素有：a,b,em,i,span,strong 等，它们不会产生换行，都是一行之内排列摆放
+        <br>
+        行内块级元素有button, img, input等，它们在行内摆放，但是自动生成宽和高识别
+    </p>
+    <hr>
+    <p>
+        所有标签都可以赋予id属性，其值用于快速查找该标签 <br>
+        为了能够更清晰的看出标签代表的意义，h5给了如下标签但是老浏览器不能识别：
+        <header>头部标签</header>
+        <nav>导航栏标签</nav>
+        <article>
+            文章内容标签，和p差不多
+        <section>1列1列的文章</section>
+        <section>第二列文章</section>
+        </article>
+        <aside>侧边栏，一般放跳转到其他页面的连接</aside>
+        <footer>底部标签</footer>
+
+    </p>
+
+</body>
+
+</html>

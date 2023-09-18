@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    
+    <script>
+        /*
+         var: 声明的变量作用域为函数级别
+         let: 生明的变量作用域为{}级别，必须先声明再使用
+                同一个作用域内，let不能声明多个相同名称的变量， var a let a也不行
+        const: 块级作用域，声明的时候必须初始化，初始化之后不允许变更，const声明的常量也不存在提升，必须先声明再使用
+        */
+        //利用解构赋值方式赋值,如下 name和age都是user的属性，但是可以直接访问
+        var user = {
+            name: "iwen",
+            age: 3
+        }
+        const {name, age} = user;
+        const {log} = console; //快捷的使用log
+
+        log(name, age)
+
+        let allStr = "helloworld"
+        let subStr = "ld"
+        log(allStr.endsWith(subStr))
+       
+    </script>
+
+    <script>
+        // async promise await
+        function ajax(url) {
+            return new Promise(function(resolve, reject){
+                // $为jquery库
+                $.getJSON(url, function(result) {
+                    resolve(result);
+                }, function(error){ reject(error)})
+            })
+        }
+
+        async  function getInfo() {
+            var id = await ajax("http://iwenwiki.com/api/generator/list.php");
+            var i = await ajax("http://iwenwiki.com/api/generator/id.php?id=" + id[0]);
+            var info = await ajax("http://iwenwiki.com/api/generator/name.php?name=" + i.name);
+            console.log(info);
+        }
+
+        getInfo();
+    </script>
+
+    <script>
+        class Person {
+            // 总是有该方法，即使我们没有定义，解释执行的时候也会自动生成
+            constructor(name, age) {
+                //属性在构造函数中定义
+                this.name = name;
+                this.age = age;
+            }
+            getName() {
+                console.log(this.name);
+            }
+            // 有关键字static修饰的方法为类方法，需要通过类来调用
+            static run() {
+                //如果 static方法中包含this，则this表示类，而不是对象
+                console.log("persion running...", this.name, "age:",this.age); // name 为Persion，每个类都有这个属性，额不是iwen
+                // out put : persion running... Person age: undefined 
+            }
+        }
+        //必须先定义再使用
+        var p = new Person("iwen", 30);
+        p.getName(); 
+        Person.run(); // ok
+        // p.run(); // p.run is not a function
+        Person.age = 40; //可以直接通过类名给类型添加静态属性，然后通过 类名.属性 引用
+
+
+        //class可以通过extens关键字实现继承，让子类继承父类的属性和方法。
+        class Point {
+            constructor(x,y) {
+                this.x = x;
+                this.y = y;
+            }
+            getPoint() {
+                console.log(this.x, this.y);
+            }
+            static info() {
+                console.log("这是一个点");
+            }
+
+        }
+        class ColorPoint extends Point {
+            constructor(x, y, color) {
+                super(x,y); // super必须放在前面
+                this.color = color;
+            }
+            getMyColor() {
+                //子类能通过this直接访问到父类的属性
+                console.log("getMyColor: ", this.x, this.y, this.color);
+            }
+        }
+        // es6规定，子类必须在constructor方法中调用super(), 否则就会报错。这是因为子类自己的this对象必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其进行加工添加子类自己的实例属性和
+        // 方法
+        let cp = new ColorPoint(4, 5, "red");
+        cp.getPoint();
+        ColorPoint.info(); //静态方法也会继承过来，直接通过子类调用，而不是子类对象
+        cp.getMyColor();
+    </script>
+
+
+</body>
+</html>

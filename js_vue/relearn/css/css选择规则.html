@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">    
+    <title>Document</title>
+    <!-- css引入方式1，只在当前页面生效 -->
+    <style>
+        h3 {
+            color: bisque;
+            font-size: 20px;
+        }
+    </style>
+    <!-- 通过引入css文件，css文件内定义各个选择器和样式属性，哪个文件引入哪个文件生效 -->
+    <link rel="stylesheet" href="css选择规则示例.css">
+</head>
+<body>
+    <h1>我的第一个h1</h1>
+    <!-- 多个class定义 -->
+    <h1 class="my-p anotherclass">h1多个class</h1>
+    <h3>这个是个h3</h3>
+    <h1>我的第一个h1</h1> 
+    <h4 style="color: blue;">通过标签属性注入css样式，只在当前标签生效。
+        <br>行内样式权重1000 > id选择器 100 > class选择器10 > 元素标签选择器1
+        权重为1000，相同优先级按照后覆盖前原则。</h4>
+    <p class="my-p">这是一个段落类型</p>
+    <p id="my-p">同一个页面只能有1个id value，不能以数字开头</p>
+    <a title="shuxing" href="https://www.baidu.com">百度</a>
+    <a title="" href="https://www.baidu.com">百度</a>
+    <a href="https://www.baidu.com">百度</a>
+    <div>
+        <h1>div 中的h1元素</h1>
+    </div>
+    <div id="embeddiv"></div>    
+    <div class="box">content</div>   
+    <table>
+        <tr>
+            <td>单元格内容</td>
+            <td>单元格内容</td>
+            <td>单元格内容</td>
+        </tr>
+        <tr>
+            <td>单元格内容</td>
+            <td>单元格内容</td>
+            <td>单元格内容</td>
+        </tr>
+        <tr>
+            <td>单元格内容</td>
+            <td>单元格内容</td>
+            <td>单元格内容</td>
+        </tr>
+    </table>
+    
+    <div class="container">
+        <div class="box1"> box1</div>
+        <div class="box2">box2</div>
+        <div class="box3">box3</div>
+
+    </div>
+
+</body>
+</html>

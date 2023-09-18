@@ -1,0 +1,162 @@
+/*全局选择器*/
+*{
+    font-family: "Pingfang SC";
+}
+/* 元素标签选择器 p,b,div,a, img,body等,权重为1 */
+h1 {
+    color: red;
+}
+h2 {
+    color: blue;
+}
+/*class选择器，同一个标签有多个class时，
+class value用空格隔开， 权重为10，权重越大优先级越高*/
+.my-p {
+    color: green;
+}
+/*id选择器，权重为100*/
+#my-p {
+    color: orange;
+}
+/* a[title=""]{
+    color: red;
+}  */
+/*属性选择器*/
+a[title="shuxing"]{
+    color: red;
+} 
+
+/*组合选择器，h1 + my-p class*/
+h1.my-p{
+    color: rgb(127, 255, 212);
+}
+/*所有的h1 h2标签*/
+h1, h2 {
+    font-size: 20px;
+}
+/*后代元素标签用空格隔开 div里面的h1元素*/
+div h1 {
+    color: blueviolet;
+}
+/* 子代选择器 用 > */
+div>h1 {
+    color: rgb(231, 220, 245);
+}
+/* 相邻兄弟选择器，用+ */
+td+td {
+    color: aqua;
+}
+/* 某个兄弟下面所有兄弟 用~ p~ul  */
+
+.box {
+    /* 宽 */
+    width: 300px;
+    /* 高 */
+    height: 300px;
+    /* 设置文本的粗细，一般700就是加粗 */
+    font-size: 30px;
+    /* 字体样式，斜体等 */
+    font-style: italic;
+    /* 字体样式：宋体、微软雅黑等 */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* 背景色，最后为透明度0~1 */
+    background-color: rgb(117, 128, 0, 0.5);
+    /* 设置背景图片 url("images/x.jpg")*/
+    background-image: none;
+    /* 背景尺寸没有容器尺寸大时，如何填充 */
+    background-repeat: no-repeat;
+    /* 设置背景图片的大小 cover:自动按照宽高比例充满整个容器，contain: 即使拉伸宽高也要填充整个容器 */
+    background-size: 50% 80%;
+    /* 设置背景图片的起始位置 left center 左中 */
+    background-position: 0%;
+    /* 文本对齐方式，左对齐，居中，右对齐 */
+    text-align: left;
+    /* 添加到文本的修饰：下划线，上划线，删除线等 */
+    text-decoration: overline;
+    /* 控制文本的大小写 captialize单词首字母大写, lowercase:小写 */
+    text-transform: capitalize;
+    /* 首行文本缩进 */
+    text-indent: 30px;
+    /* 边框属性 */
+    border: 3px solid blue;
+    /* 内边距*/
+    padding: 20px 60px;
+    /* 外边距按照两个值，第一个为上下，第二个为左右 */
+    margin: 15px 20px;
+    /* 实际内容 */
+    content:normal;
+}
+/* 浮动可以脱离标准流， float只有left/right，
+两张图片都使用float时两张图片都脱离标准流，它们之间不会再出现空格间隙 */
+#embeddiv{
+    width: 40px;
+    height: 40px;
+    background-color: blueviolet;
+    float: left;
+    /* position属性指定元素的定位类型，取值有 relative,absolute,fixed,
+     其中 absolute/fixed会脱离标准文档流，可以使用 left/top/right/bottom 四个属性表示偏移像素点
+     每设置一个绝对定位就增加一个图层，float总共只会多一个图层
+     fixed固定定位不会随着鼠标滚动而滚动，常用于侧边栏广告小窗口
+     相对定位和绝对定位跟随上一个有定位的父亲，如果父亲没有设置position，则继续网上找
+     z-index属性的值（10/100等）可以调整层级的上下
+     */
+    position: absolute;
+    left: 20px;
+}
+/* 为了防止浮动导致父级标签塌陷,可以给父元素设置高度或者使用伪对象方式清除clear：both；与 overflow: hidden属性 */
+/* 如果后续元素受到浮动影响，可以使用 clear: both 清除 */
+
+
+table,td{
+    /* 边框属性 */
+    border: 1px solid red;
+    /* 折叠边框，边框合并成一个 */
+    border-collapse: collapse;
+    /* 文字与边框 填充像素 */
+    padding: 10px;
+    background-color: antiquewhite;
+    color: rgb(168, 127, 255);
+}
+table{
+    width: 500px;
+    height: 100px;
+    text-align: center;
+}
+/* 弹性盒子 */
+.container{
+    width: 300px;
+    height: 400px;
+    background-color: antiquewhite;
+    /* 容器内开启弹性盒子属性，默认横向摆放 */
+    display: flex;
+    /* 弹性子元素在父容器中的位置，row:横向对齐，默认；column：竖向对齐；row-reverse从后往前排，最后一个排在最前面；column-revers反转纵向排列 */
+    flex-direction: row;
+    /* 内容对齐属性，应用在弹性容器上，让子元素沿着主容器的抽线对齐
+        flex-start, flex-end, center
+    */
+    justify-content: center;
+    align-items: center;
+    /* 根据弹性盒子元素所设置的扩展因子作为比率来分配剩余空间 默认0如果存在剩余空间也不放大 0.3*/
+    flex: 0.9;
+}
+.box1{
+    width: 30px;
+    height: 40px;
+    background-color: rgba(150, 0, 0, 0.868);
+    flex: 2;
+}
+.box2{
+    width: 30px;
+    height: 40px;
+    background-color: aqua;
+    /* 宽度不再生效 */
+    flex: 2;
+}
+.box3{
+    width: 30px;
+    height: 40px;
+    background-color: blue;
+    margin: 10px;
+    /* 宽度不再生效 */
+    flex: 1;
+}
