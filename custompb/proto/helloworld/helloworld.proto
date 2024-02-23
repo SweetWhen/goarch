@@ -1,9 +1,11 @@
 syntax = "proto3";
 
 package helloworld;
-option go_package="custompb/proto/gen/helloworld";
+
+option go_package="github.com/SweetWhen/goarch/custompb/proto/gen/helloworld";
 
 import "custompb/proto/interceptor/interceptor.proto";
+import "google/api/annotations.proto";
 
 service Greeter {
     option (interceptor.service_handler) = {
@@ -15,11 +17,20 @@ service Greeter {
             whitelist: "ip_whitelist",
             logger: true,
         };
+        option (google.api.http) = {
+           get: "/api/v1/hello"
+           // additional_bindings {
+           //     get: "/api/v1/hhello"
+           // }
+        };
     }
 
     rpc SayHello2 (HelloRequest) returns (HelloReply) {
         option (interceptor.method_handler) = {
             logger: false,
+        };
+        option (google.api.http) = {
+            get: "/api/v1/hello2"
         };
     }
 

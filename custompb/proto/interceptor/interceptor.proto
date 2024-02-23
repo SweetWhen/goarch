@@ -3,7 +3,7 @@
 syntax = "proto3";
 
 package interceptor;
-option go_package="custompb/proto/gen/interceptor";
+option go_package="github.com/SweetWhen/goarch/custompb/proto/gen/interceptor";
 
 import "google/protobuf/descriptor.proto";
 
